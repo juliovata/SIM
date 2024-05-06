@@ -3,10 +3,10 @@ CFLAGS = --std=c99 -Wall -Werror -pedantic
 LIBS = -lncurses
 BUILD_DIR = build
 
-SIM: $(BUILD_DIR)/main.o
+sim: $(BUILD_DIR)/sim.o
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
-$(BUILD_DIR)/main.o: main.c | $(BUILD_DIR)
+$(BUILD_DIR)/sim.o: sim.c version.h config.h | $(BUILD_DIR)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(BUILD_DIR):
@@ -15,4 +15,4 @@ $(BUILD_DIR):
 .PHONY: clean
 clean:
 	rm -f build/*
-	rm -f SIM
+	rm -f sim
