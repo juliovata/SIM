@@ -1,7 +1,9 @@
 # SIM
+
 Serial monitor IMproved
 
-# Requirements
+## Requirements
+
 - gcc
 - make
 - ncurses
