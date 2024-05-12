@@ -7,11 +7,12 @@
 #ifndef SIM_H_
 #define SIM_H_
 
-// TODO(juliovata): Should probably be an enum
-#define MODE_NORMAL (0)
-#define MODE_CMD (1)
+typedef enum {
+  Normal,
+  Command_line
+} program_mode;
 
-#define CMD_ROW_START (3)
-#define CMD_COL_START (0)
+// TODO(juliovata): How portable is this??
+#define ESCAPE_KEY (27)
 
 #endif

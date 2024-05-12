@@ -1,26 +1,22 @@
 CC = gcc
-CFLAGS = --std=c99 -Wconversion -Wall -Wextra -pedantic 
+CFLAGS = --std=c99 -Wall -Wextra -Wconversion -pedantic
 LIBS = -lncurses
+
 BUILD_DIR = build
 
-sim: $(BUILD_DIR)/sim.o
-	$(CC) $(CFLAGS) $^ $(LIBS) -o sim
+# Debug
+debug: CFLAGS += -DDEBUG -O0 -g 
+debug: $(BUILD_DIR)/debug/sim.o
+	$(CC) $(CFLAGS) $^ $(LIBS) -o sim_dbg
 
-debug: CFLAGS += -DDEBUG -g3
-debug: $(BUILD_DIR)/sim.o
-	$(CC) $(CFLAGS) $^ $(LIBS) -o sim_dbg 
-
-release: CFLAGS += -O3
-release: sim
-
-all: release sim_dbg
-
-$(BUILD_DIR)/sim.o: sim.c sim.h config.h version.h | $(BUILD_DIR)
+$(BUILD_DIR)/debug/sim.o: sim.c sim.h config.h version.h | $(BUILD_DIR)/debug
 	$(CC) -c $(CFLAGS) $< -o $@
 
-$(BUILD_DIR):
-	mkdir $@
+$(BUILD_DIR)/debug:
+	mkdir $@	
+
+all: debug
 
 .PHONY: clean
 clean:
-	rm -f build/* sim sim_dbg
+	rm -f $(BUILD_DIR)/debug/* sim_dbg

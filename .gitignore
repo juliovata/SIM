@@ -4,5 +4,4 @@ build
 
 compile_commands.json
 
-sim
 sim_dbg
